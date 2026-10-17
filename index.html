@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cursed Hollow Moon</title>
+<meta name="description" content="Player guide to the Cursed Hollow Moon Halloween event on CobblemonGG: every way to earn Spectral Candy and everything it unlocks.">
+<meta name="theme-color" content="#17112a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cursed Hollow Moon">
+<meta property="og:description" content="Player guide to the Cursed Hollow Moon Halloween event on CobblemonGG: every way to earn Spectral Candy and everything it unlocks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=Pixelify+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one long night-sky scroll. Moon hero, a Candy strip, then one section per way to play, ending on rewards. Single dark theme by choice: the whole event happens at night. */
+:root {
+  color-scheme: dark;
+  --night: #17112a;
+  --night-raised: #211839;
+  --night-deep: #0f0a1c;
+  --haze: #36235f;
+  --line: #3a2d58;
+  --moon: #f2e9d3;
+  --fg: #ddd4eb;
+  --muted: #a99cc1;
+  --candy: #ff9d42;
+  --spectral: #bb96ff;
+  --rocket: #ff5a6e;
+  --rocket-glow: #ff5a6e99;
+  --star: #f2e9d3;
+  --fog: #bb96ff1c;
+  --chat-bg: #000000a8;
+  --chat-fg: #ffffff;
+  --moon-hi: #fffbef;
+  --moon-lo: #cbbb96;
+  --moon-edge: #9c8a68;
+  --crater: #cdbd99;
+  --moon-curse: #5a2fa0b8;
+  --moon-halo: #bb96ff3d;
+  --moon-halo-far: #bb96ff12;
+
+  --font-display: "Grenze Gotisch", "Iowan Old Style", Georgia, serif;
+  --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-pixel: "Pixelify Sans", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+a { color: var(--spectral); }
+a:focus-visible, input:focus-visible { outline: 2px solid var(--candy); outline-offset: 2px; }
+
+.wrap {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 70% at 78% 35%, var(--haze) 0%, transparent 70%),
+    linear-gradient(180deg, var(--night-deep) 0%, var(--night) 100%);
+  border-bottom: 1px solid var(--line);
+}
+.sky, .sky::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.sky {
+  background-image:
+    radial-gradient(1px 1px at 23px 41px, var(--star), transparent),
+    radial-gradient(1px 1px at 97px 13px, var(--star), transparent),
+    radial-gradient(1.5px 1.5px at 151px 87px, var(--star), transparent),
+    radial-gradient(1px 1px at 61px 139px, var(--star), transparent),
+    radial-gradient(1px 1px at 183px 171px, var(--star), transparent),
+    radial-gradient(1.5px 1.5px at 129px 197px, var(--star), transparent);
+  background-size: 210px 210px;
+  opacity: .5;
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
+  mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
+}
+.sky::after {
+  content: "";
+  background-image:
+    radial-gradient(1.5px 1.5px at 40px 260px, var(--star), transparent),
+    radial-gradient(1px 1px at 300px 40px, var(--star), transparent),
+    radial-gradient(2px 2px at 210px 150px, var(--star), transparent),
+    radial-gradient(1px 1px at 120px 300px, var(--star), transparent);
+  background-size: 340px 340px;
+  opacity: .8;
+}
+.fog {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -50px;
+  height: 200px;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 60% at 20% 70%, var(--fog), transparent 70%),
+    radial-gradient(35% 50% at 58% 82%, var(--fog), transparent 70%),
+    radial-gradient(30% 55% at 88% 66%, var(--fog), transparent 70%);
+  animation: drift 30s ease-in-out infinite alternate;
+}
+@keyframes drift { from { transform: translateX(-4%); } to { transform: translateX(4%); } }
+
+.hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+  padding-block: clamp(48px, 8vw, 104px) clamp(56px, 8vw, 96px);
+}
+.kicker {
+  font-family: var(--font-pixel);
+  font-size: .9rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--candy);
+  margin: 0 0 10px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.4rem, 10vw, 7rem);
+  line-height: .88;
+  letter-spacing: .005em;
+  color: var(--moon);
+  margin: 0 0 22px;
+  text-wrap: balance;
+  text-shadow: 0 0 40px var(--moon-halo);
+}
+.lede {
+  font-size: clamp(1.08rem, 1.6vw, 1.22rem);
+  max-width: 36rem;
+  margin: 0 0 28px;
+}
+.chat-label {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.chat {
+  display: inline-block;
+  max-width: 100%;
+  font-family: var(--font-pixel);
+  font-size: 1rem;
+  line-height: 1.45;
+  background: var(--chat-bg);
+  color: var(--chat-fg);
+  padding: 8px 12px;
+  border-radius: 2px;
+  margin: 0;
+}
+.chat b { color: var(--candy); font-weight: 600; }
+
+.moon-wrap { display: grid; justify-items: center; gap: 14px; }
+.moon {
+  position: relative;
+  width: min(100%, 340px);
+  aspect-ratio: 1;
+  max-width: 100%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 64% 30%, var(--crater) 0 6%, transparent 6.6%),
+    radial-gradient(circle at 30% 58%, var(--crater) 0 9%, transparent 9.6%),
+    radial-gradient(circle at 52% 76%, var(--crater) 0 4.5%, transparent 5%),
+    radial-gradient(circle at 78% 52%, var(--crater) 0 3.5%, transparent 4%),
+    radial-gradient(circle at 40% 28%, var(--crater) 0 3%, transparent 3.5%),
+    radial-gradient(circle at 36% 32%, var(--moon-hi) 0%, var(--moon) 40%, var(--moon-lo) 82%, var(--moon-edge) 100%);
+  box-shadow:
+    inset -36px -28px 72px var(--moon-curse),
+    0 0 70px 10px var(--moon-halo),
+    0 0 180px 50px var(--moon-halo-far);
+  animation: hover 10s ease-in-out infinite alternate;
+}
+@keyframes hover { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+.beacon {
+  position: absolute;
+  left: 63%;
+  top: 63%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--rocket);
+  box-shadow: 0 0 12px 4px var(--rocket-glow);
+  animation: blink 2.2s ease-in-out infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+.moon-cap {
+  font-family: var(--font-pixel);
+  font-size: .85rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+}
+.moon-cap span { color: var(--rocket); }
+
+@media (max-width: 760px) {
+  .hero-inner { grid-template-columns: 1fr; padding-block: 36px 56px; }
+  .moon-wrap { order: -1; justify-items: start; }
+  .moon { width: 150px; }
+  .moon-cap { text-align: left; }
+}
+
+/* ---------- Jump nav ---------- */
+.jump {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: color-mix(in srgb, var(--night) 90%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.jump .wrap {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-block: 8px;
+}
+.jump .wrap::-webkit-scrollbar { display: none; }
+.jump a {
+  flex: none;
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+.jump a:hover, .jump a:focus-visible { color: var(--moon); background: var(--night-raised); }
+
+/* ---------- Shared section pieces ---------- */
+section { scroll-margin-top: 64px; }
+.eyebrow {
+  font-family: var(--font-pixel);
+  font-size: .85rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--candy);
+  margin: 0;
+}
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 5vw, 3.3rem);
+  line-height: 1;
+  color: var(--moon);
+  margin: 8px 0 16px;
+  text-wrap: balance;
+}
+h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--moon);
+  margin: 0;
+  text-wrap: balance;
+}
+.sub {
+  font-size: .82rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.fine { font-size: .9rem; color: var(--muted); margin: 10px 0 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+.sec {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: start;
+  padding-block: 80px 0;
+}
+.sec-head p { margin: 0 0 12px; max-width: 34rem; }
+.sec-body { min-width: 0; display: grid; gap: 22px; container-type: inline-size; }
+@media (min-width: 1000px) { .sec-head { position: sticky; top: 76px; } }
+@media (max-width: 999px) { .sec { grid-template-columns: 1fr; padding-block: 64px 0; } }
+
+.tbl-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--night-raised);
+}
+table { width: 100%; border-collapse: collapse; font-size: .98rem; }
+th {
+  text-align: left;
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+td { padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.candy {
+  color: var(--candy);
+  font-weight: 800;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+td strong { color: var(--moon); }
+th.right, td.right { text-align: right; }
+
+.chip {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.chip.medium { border-color: var(--spectral); color: var(--spectral); }
+
+/* ---------- Candy at a glance ---------- */
+.glance { padding-block: 64px 0; }
+.glance-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; margin-bottom: 20px; }
+.glance-head h2 { margin-bottom: 0; }
+.glance-head p { margin: 0; max-width: 30rem; color: var(--muted); }
+.glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .glance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .glance-grid { grid-template-columns: 1fr; } }
+.g-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 18px 20px;
+  background: var(--night-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .2s, transform .2s;
+}
+.g-card:hover { border-color: var(--spectral); transform: translateY(-2px); }
+.g-amount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--candy);
+  font-variant-numeric: tabular-nums;
+}
+.g-unit {
+  font-family: var(--font-pixel);
+  font-size: .78rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.g-name { font-weight: 800; color: var(--moon); font-size: 1.08rem; margin-top: 10px; }
+.g-desc { color: var(--muted); font-size: .95rem; line-height: 1.5; }
+
+/* ---------- Cursed rule ---------- */
+.rule {
+  border: 1px dashed var(--spectral);
+  border-radius: 10px;
+  padding: 16px 18px;
+  background: color-mix(in srgb, var(--spectral) 8%, transparent);
+  display: grid;
+  gap: 4px;
+}
+.rule p { margin: 0; }
+
+/* ---------- Pumpkaboo ---------- */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  counter-reset: step;
+}
+.steps li {
+  counter-increment: step;
+  padding: 10px 12px;
+  border-top: 2px solid var(--line);
+  font-weight: 700;
+  font-size: .93rem;
+  line-height: 1.35;
+  color: var(--moon);
+}
+.steps li::before {
+  content: counter(step);
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: .8rem;
+  color: var(--spectral);
+  margin-bottom: 4px;
+}
+.steps li:last-child { border-top-color: var(--candy); }
+@container (max-width: 520px) {
+  .steps { grid-template-columns: 1fr; gap: 0; }
+  .steps li { display: flex; gap: 12px; align-items: baseline; border-top-width: 1px; }
+  .steps li::before { margin: 0; }
+}
+
+.tiers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@container (max-width: 480px) { .tiers { grid-template-columns: 1fr; } }
+.tier {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 14px;
+  align-items: start;
+  padding: 18px;
+  background: var(--night-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.tier .orb { grid-row: span 3; margin-top: 4px; }
+.tier h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1.05; }
+.tier p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.5; }
+.tier .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; }
+.tier .amt { color: var(--candy); font-weight: 800; font-variant-numeric: tabular-nums; }
+.tier.top { border-color: var(--spectral); }
+
+.orb {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, var(--moon-hi), var(--candy) 55%, var(--candy) 100%);
+  box-shadow: 0 0 var(--glow, 4px) calc(var(--glow, 4px) / 3) var(--orb-glow, var(--candy));
+}
+.orb.t1 { --glow: 4px; opacity: .8; }
+.orb.t2 { --glow: 12px; }
+.orb.t3 { --glow: 20px; }
+.orb.t4 {
+  --glow: 26px;
+  --orb-glow: var(--spectral);
+  background: radial-gradient(circle at 40% 35%, var(--moon-hi), var(--spectral) 55%, var(--candy) 100%);
+}
+
+/* ---------- Research ---------- */
+.payout {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--night-raised);
+  padding: 6px 18px;
+}
+.payout-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.payout-row:last-child { border-bottom: 0; }
+.payout-row .num { font-family: var(--font-pixel); color: var(--candy); white-space: nowrap; }
+.payout-row.bonus span:first-child { color: var(--moon); font-weight: 700; }
+.payout-row.total { border-top: 1px solid var(--muted); border-bottom: 0; margin-top: 2px; }
+.payout-row.total span:first-child { font-weight: 800; color: var(--moon); }
+.payout-row.total .num { font-size: 1.15rem; }
+
+.tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+}
+@container (max-width: 500px) { .tasks { grid-template-columns: 1fr; } }
+.tasks li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: .97rem;
+  line-height: 1.4;
+}
+.tasks .chip { flex: none; width: 4.6rem; text-align: center; }
+
+/* ---------- Rituals ---------- */
+.sched { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.sched span {
+  font-size: .9rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--moon);
+}
+.sched b { color: var(--candy); font-variant-numeric: tabular-nums; }
+.ritual-name { font-weight: 800; color: var(--moon); white-space: nowrap; }
+td.buff { color: var(--spectral); font-weight: 700; }
+
+/* ---------- Milestones ---------- */
+.tracker {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--night-raised);
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+.tracker label { font-weight: 800; color: var(--moon); }
+.tracker-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+#score {
+  width: 9rem;
+  font: 600 1.1rem var(--font-pixel);
+  color: var(--candy);
+  background: var(--night);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+#score::placeholder { color: var(--muted); }
+#score-out { margin: 0; color: var(--fg); font-weight: 600; min-width: 0; flex: 1 1 14rem; }
+.rail {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--night);
+  border: 1px solid var(--line);
+  margin-block: 6px 4px;
+}
+.rail-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--spectral), var(--candy));
+  transition: width .3s ease;
+}
+.tick {
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 18px;
+  margin: -9px 0 0 -2px;
+  border-radius: 2px;
+  background: var(--muted);
+}
+.tick:last-child { margin-left: -4px; }
+
+.ladder { list-style: none; margin: 0; padding: 0; display: grid; }
+.ladder li {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 2px 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ladder li:last-child { border-bottom: 0; }
+.ladder .score {
+  grid-row: span 2;
+  font-family: var(--font-pixel);
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  padding-top: 2px;
+}
+.ladder .score small { display: block; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; }
+.ladder .title { font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; line-height: 1.1; color: var(--moon); }
+.ladder .reward { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-weight: 700; }
+.ladder li.reached .score { color: var(--candy); }
+.ladder li.reached .title::after { content: " ✓"; color: var(--candy); font-family: var(--font-body); font-size: 1rem; }
+
+/* ---------- Leaderboard ---------- */
+.ranks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ranks li {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--night-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.ranks .place { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1; color: var(--moon); font-variant-numeric: tabular-nums; }
+.tag {
+  justify-self: start;
+  font-family: var(--font-pixel);
+  font-size: 1rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: var(--chat-bg);
+  color: var(--moon);
+}
+.ranks li.first { border-color: var(--candy); }
+.ranks li.first .place, .ranks li.first .tag { color: var(--candy); }
+@media (max-width: 420px) { .ranks li { grid-template-columns: 1fr; gap: 8px; } }
+
+/* ---------- Hollie + footer ---------- */
+.hollie {
+  margin-top: 88px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse 50% 120% at 100% 50%, var(--haze), transparent 70%),
+    var(--night-deep);
+}
+.hollie .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+  padding-block: 36px;
+}
+.hollie h2 { font-size: clamp(1.9rem, 4vw, 2.5rem); margin: 0; }
+.hollie p { margin: 0; max-width: 38rem; }
+footer .wrap {
+  padding-block: 28px 40px;
+  font-size: .88rem;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+footer p { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="sky" aria-hidden="true"></div>
+  <div class="fog" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <p class="kicker">CobblemonGG Halloween Event · 2 weeks</p>
+      <h1>Cursed Hollow Moon</h1>
+      <p class="lede">Team Rocket built a secret base on the moon, and it's cursing the overworld. Every night, Ghost, Dark, and Poison-type Pokémon turn Cursed and come after trainers. Fight back, collect Spectral Candy, and unlock exclusive skins, cosmetics, and tags.</p>
+      <p class="chat-label">What you'll see in chat</p>
+      <p class="chat">You defeated a Cursed Haunter and recovered <b>3 Spectral Candy</b>.</p>
+    </div>
+    <div class="moon-wrap" aria-hidden="true">
+      <div class="moon"><span class="beacon"></span></div>
+      <p class="moon-cap">See the <span>red light</span>? That's Team Rocket's outpost.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Guide sections">
+  <div class="wrap">
+    <a href="#candy">Candy</a>
+    <a href="#cursed">Cursed Pokémon</a>
+    <a href="#pumpkaboo">Pumpkaboo</a>
+    <a href="#research">Research</a>
+    <a href="#rituals">Rituals</a>
+    <a href="#milestones">Milestones</a>
+    <a href="#leaderboard">Leaderboard</a>
+  </div>
+</nav>
+
+<main>
+  <section id="candy" class="wrap glance">
+    <div class="glance-head">
+      <div>
+        <p class="eyebrow">The event currency</p>
+        <h2>Ways to earn Spectral Candy</h2>
+      </div>
+      <p>Every piece of Candy you earn raises your Spectral Score. Your score unlocks milestone rewards and ranks you on the global leaderboard.</p>
+    </div>
+    <div class="glance-grid">
+      <a class="g-card" href="#cursed">
+        <span class="g-amount">1–5</span>
+        <span class="g-unit">Candy per win</span>
+        <span class="g-name">Cursed Pokémon</span>
+        <span class="g-desc">Beat the Ghost, Dark, and Poison-types that attack you at night.</span>
+      </a>
+      <a class="g-card" href="#pumpkaboo">
+        <span class="g-amount">10–50</span>
+        <span class="g-unit">Candy per Pumpkaboo</span>
+        <span class="g-name">Haunted Pumpkaboo</span>
+        <span class="g-desc">Find them hiding in the overworld, then defeat or catch them.</span>
+      </a>
+      <a class="g-card" href="#research">
+        <span class="g-amount">34–43</span>
+        <span class="g-unit">Candy an hour</span>
+        <span class="g-name">Spectral Research</span>
+        <span class="g-desc">Finish all 3 of your hourly tasks for the full payout.</span>
+      </a>
+      <a class="g-card" href="#rituals">
+        <span class="g-amount">3–30</span>
+        <span class="g-unit">Candy per ritual</span>
+        <span class="g-name">Moon Altar Rituals</span>
+        <span class="g-desc">Team up with the server to stop Team Rocket and earn a buff.</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="cursed" class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">1–5 Candy per win</p>
+      <h2>Cursed Pokémon</h2>
+      <p>When night falls in the overworld, Ghost, Dark, and Poison-type Pokémon can spawn Cursed. You don't have to look for them. A Cursed Pokémon will come after you and start a battle, so keep your team ready.</p>
+      <p>The curse lasts from nightfall until dawn. The rarer the Cursed Pokémon, the more Candy it drops.</p>
+    </div>
+    <div class="sec-body">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Cursed Pokémon</th><th>How often</th><th class="right">Candy</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Common</strong></td><td>Common</td><td class="candy right">1</td></tr>
+            <tr><td><strong>Uncommon</strong></td><td>Uncommon</td><td class="candy right">2</td></tr>
+            <tr><td><strong>Rare</strong></td><td>Rare</td><td class="candy right">3–4</td></tr>
+            <tr><td><strong>Elite</strong></td><td>Very rare</td><td class="candy right">5</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rule">
+        <h3>Mix it up</h3>
+        <p>Beating the same Pokémon over and over won't work. After 5 wins against the same Pokémon, it stops dropping Candy until you catch a different Pokémon.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pumpkaboo" class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">10–50 Candy each</p>
+      <h2>Haunted Pumpkaboo</h2>
+      <p>Haunted Pumpkaboo hide all over the overworld every night. They're the biggest Candy prize you can find on your own, so keep your eyes open while you explore.</p>
+      <p>Once one is beaten or caught, it disappears and shows up somewhere else later.</p>
+    </div>
+    <div class="sec-body">
+      <div>
+        <p class="sub">How an encounter works</p>
+        <ol class="steps">
+          <li>Get close to it</li>
+          <li>It reveals itself</li>
+          <li>A battle starts</li>
+          <li>Defeat it or catch it</li>
+          <li>Collect your Candy</li>
+        </ol>
+      </div>
+      <div>
+        <p class="sub">Four kinds to find</p>
+        <div class="tiers">
+          <div class="tier">
+            <span class="orb t1" aria-hidden="true"></span>
+            <h3>Flickering Pumpkaboo</h3>
+            <p>Look for haunted particles.</p>
+            <div class="meta"><span class="amt">10–15 Candy</span><span class="chip">Common</span></div>
+          </div>
+          <div class="tier">
+            <span class="orb t2" aria-hidden="true"></span>
+            <h3>Lantern Pumpkaboo</h3>
+            <p>A brighter flame and its own custom name.</p>
+            <div class="meta"><span class="amt">15–20 Candy</span><span class="chip">Uncommon</span></div>
+          </div>
+          <div class="tier">
+            <span class="orb t3" aria-hidden="true"></span>
+            <h3>Wailing Pumpkaboo</h3>
+            <p>Fog, an eerie sound, and a tougher battle.</p>
+            <div class="meta"><span class="amt">25–40 Candy</span><span class="chip">Rare</span></div>
+          </div>
+          <div class="tier top">
+            <span class="orb t4" aria-hidden="true"></span>
+            <h3>Moon-Cursed Pumpkaboo</h3>
+            <p>A purple glow and a boss-style fight.</p>
+            <div class="meta"><span class="amt">35–50 Candy</span><span class="chip medium">Very rare</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">Up to 43 Candy an hour</p>
+      <h2>Spectral Research</h2>
+      <p>Every hour you get 3 new research tasks. Each finished task pays 3–6 Spectral Candy, and finishing all three adds a 25 Candy bonus.</p>
+      <p>It's the steadiest Candy in the event. Check back every hour for a fresh set.</p>
+    </div>
+    <div class="sec-body">
+      <div class="payout">
+        <div class="payout-row"><span>Task 1</span><span class="num">3–6</span></div>
+        <div class="payout-row"><span>Task 2</span><span class="num">3–6</span></div>
+        <div class="payout-row"><span>Task 3</span><span class="num">3–6</span></div>
+        <div class="payout-row bonus"><span>Bonus for finishing all three</span><span class="num">+25</span></div>
+        <div class="payout-row total"><span>Your hour</span><span class="num">34–43 Candy</span></div>
+      </div>
+      <div>
+        <p class="sub">Tasks you might get</p>
+        <ul class="tasks">
+          <li><span class="chip">Easy</span>Defeat 6 Cursed Pokémon</li>
+          <li><span class="chip">Easy</span>Catch 3 Ghost-type Pokémon</li>
+          <li><span class="chip">Easy</span>Catch 2 Poison-type Pokémon</li>
+          <li><span class="chip">Easy</span>Catch 2 Dark-type Pokémon</li>
+          <li><span class="chip">Easy</span>Win 3 wild Pokémon battles</li>
+          <li><span class="chip">Easy</span>Mine 16 diamonds</li>
+          <li><span class="chip">Easy</span>Harvest 16 pumpkins</li>
+          <li><span class="chip">Easy</span>Trade with a player once</li>
+          <li><span class="chip medium">Medium</span>Discover 1 Haunted Pumpkaboo</li>
+          <li><span class="chip medium">Medium</span>Defeat 1 Elite Cursed Pokémon</li>
+          <li><span class="chip medium">Medium</span>Catch Pokémon with 3 different Poké Ball types</li>
+          <li><span class="chip medium">Medium</span>Win a battle with a Ghost, Dark, or Poison-type on your team</li>
+        </ul>
+        <p class="fine">These are examples. Your three tasks are picked at random each hour.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="rituals" class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">3–30 Candy + server buffs</p>
+      <h2>Moon Altar Rituals</h2>
+      <p>Team Rocket's moon altar at spawn charges up several times a day. When a ritual starts, the whole server gets one shared goal and a time limit. Hit the goal to stop the ritual.</p>
+      <p>Win, and the whole server gets a Lunar Surge buff. Everyone who helped also earns Candy.</p>
+      <div class="sched">
+        <span>Rituals: <b>60 min</b></span>
+        <span>Weekend Grand Rituals: <b>90 min</b></span>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div>
+        <p class="sub">The rituals</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Ritual</th><th>Server goal</th><th>Lunar Surge if you win</th></tr></thead>
+            <tbody>
+              <tr><td class="ritual-name">Graveyard Excavation</td><td>Mine 20,000 stone, deepslate, or soul sand</td><td class="buff">+30% Ghost-type spawns for 60 min</td></tr>
+              <tr><td class="ritual-name">Toxic Bloom</td><td>Catch 350 Poison-type Pokémon</td><td class="buff">+30% Poison-type spawns for 60 min</td></tr>
+              <tr><td class="ritual-name">Midnight Hunt</td><td>Defeat 1,000 Cursed Pokémon</td><td class="buff">+25% Ghost, Dark, and Poison spawns for 60 min</td></tr>
+              <tr><td class="ritual-name">Shadow Collection</td><td>Catch 300 Dark-type Pokémon</td><td class="buff">+30% Dark-type spawns for 60 min</td></tr>
+              <tr><td class="ritual-name">Pumpkin Purge</td><td>Find or defeat 100 Haunted Pumpkaboo</td><td class="buff">+15% Haunted Pumpkaboo for 45 min</td></tr>
+              <tr><td class="ritual-name">Lunar Stabilization</td><td>Complete 500 Spectral Research tasks</td><td class="buff">+15% Candy from Cursed Pokémon for 60 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p class="sub">Your ritual reward</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Your share of the server's progress</th><th class="right">Candy</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Any amount</strong></td><td class="candy right">3</td></tr>
+              <tr><td><strong>1.5% or more</strong></td><td class="candy right">8</td></tr>
+              <tr><td><strong>3% or more</strong></td><td class="candy right">15</td></tr>
+              <tr><td><strong>5% or more</strong> · top contributors, plus a chance at a cosmetic</td><td class="candy right">20–30</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="milestones" class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">Unlocks from 300 to 4,250 Score</p>
+      <h2>Milestone rewards</h2>
+      <p>Your Spectral Score counts every piece of Candy you earn during the event. Reach a milestone and its reward is yours.</p>
+      <p>You don't need to top the leaderboard to win something. Every player can work toward these.</p>
+    </div>
+    <div class="sec-body">
+      <div class="tracker">
+        <label for="score">Check your progress</label>
+        <div class="tracker-row">
+          <input id="score" type="number" inputmode="numeric" min="0" step="1" placeholder="Your score">
+          <p id="score-out" aria-live="polite">Type your Spectral Score to see your next unlock.</p>
+        </div>
+        <div class="rail" aria-hidden="true">
+          <div class="rail-fill" id="score-bar"></div>
+          <span class="tick" style="left:7.06%"></span>
+          <span class="tick" style="left:20%"></span>
+          <span class="tick" style="left:41.18%"></span>
+          <span class="tick" style="left:75.29%"></span>
+          <span class="tick" style="left:100%"></span>
+        </div>
+      </div>
+      <ol class="ladder">
+        <li data-score="300" data-reward="the Cursed Pumpkin Head">
+          <span class="score">300<small>Score</small></span>
+          <span class="title">Moonlit Researcher</span>
+          <span class="reward">Cursed Pumpkin Head <span class="chip">Player cosmetic</span></span>
+        </li>
+        <li data-score="850" data-reward="the Haunted Pumpkaboo skin">
+          <span class="score">850<small>Score</small></span>
+          <span class="title">Rocket Interference</span>
+          <span class="reward">Haunted Pumpkaboo skin <span class="chip medium">Pokémon skin</span></span>
+        </li>
+        <li data-score="1750" data-reward="the Werewolf Head">
+          <span class="score">1,750<small>Score</small></span>
+          <span class="title">Hollow Moon Adept</span>
+          <span class="reward">Werewolf Head <span class="chip">Player cosmetic</span></span>
+        </li>
+        <li data-score="3200" data-reward="the Shadow Rocket Umbreon skin">
+          <span class="score">3,200<small>Score</small></span>
+          <span class="title">Moon Exorcist</span>
+          <span class="reward">Shadow Rocket Umbreon skin <span class="chip medium">Pokémon skin</span></span>
+        </li>
+        <li data-score="4250" data-reward="the ✦ Moonbreaker ✦ tag and an Event Crate">
+          <span class="score">4,250<small>Score</small></span>
+          <span class="title">Savior of Hollow Moon</span>
+          <span class="reward">✦ Moonbreaker ✦ tag and an Event Crate <span class="chip">Tag + crate</span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="leaderboard" class="wrap sec">
+    <div class="sec-head">
+      <p class="eyebrow">Top 25 players</p>
+      <h2>Global leaderboard</h2>
+      <p>The players who earn the most Spectral Candy by the end of the event win exclusive tags. Leaderboard tags come on top of your milestone rewards.</p>
+    </div>
+    <div class="sec-body">
+      <ol class="ranks">
+        <li class="first"><span class="place">1st</span><span class="tag">Hollow Moon Champion</span></li>
+        <li><span class="place">2nd–3rd</span><span class="tag">Lunar Elite</span></li>
+        <li><span class="place">4th–10th</span><span class="tag">Shadow Rider</span></li>
+        <li><span class="place">11th–25th</span><span class="tag">Cursed Survivor</span></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<section class="hollie" aria-labelledby="hollie-title">
+  <div class="wrap">
+    <h2 id="hollie-title">Find Hex Maniac Hollie</h2>
+    <p>Need a reminder while you play? Talk to Hex Maniac Hollie at spawn. Hollie can explain every part of the event and send you straight to the Moon Altar.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Cursed Hollow Moon · CobblemonGG Halloween event</p>
+    <p>Rewards and numbers may be adjusted during the event.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var input = document.getElementById('score');
+  var out = document.getElementById('score-out');
+  var bar = document.getElementById('score-bar');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.ladder li'));
+  var MAX = 4250;
+
+  function render() {
+    var raw = input.value.trim();
+    var v = Math.max(0, Math.floor(Number(raw) || 0));
+    var has = raw !== '';
+    rows.forEach(function (li) {
+      li.classList.toggle('reached', has && v >= Number(li.dataset.score));
+    });
+    bar.style.width = (has ? Math.min(100, v / MAX * 100) : 0) + '%';
+    if (!has) {
+      out.textContent = 'Type your Spectral Score to see your next unlock.';
+      return;
+    }
+    var next = rows.filter(function (li) { return v < Number(li.dataset.score); })[0];
+    if (!next) {
+      out.textContent = "You've unlocked every milestone reward. Now climb the leaderboard!";
+      return;
+    }
+    var need = Number(next.dataset.score) - v;
+    out.textContent = need.toLocaleString() + ' more Candy until ' + next.dataset.reward + '.';
+  }
+
+  try {
+    var saved = localStorage.getItem('chm-score');
+    if (saved) input.value = saved;
+  } catch (e) {}
+
+  input.addEventListener('input', function () {
+    render();
+    try { localStorage.setItem('chm-score', input.value); } catch (e) {}
+  });
+  render();
+})();
+</script>
+</body>
+</html>
